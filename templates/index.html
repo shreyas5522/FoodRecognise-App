@@ -8,6 +8,15 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 
+<style>
+    /* Add CSS to control the size and aspect ratio of the image */
+    #result img, #preview img {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+    }
+</style>
+
 {% endblock %}
 
 <body>
@@ -15,12 +24,15 @@
         <h1 style="text-align: center;">Choose the image to continue</h1>
         <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data"
             onsubmit="return validateForm()">
-            <input type="file" name="photo" id="photo" accept="image/*">
+            <input type="file" name="photo" id="photo" accept="image/*" onchange="previewImage()">
             <label for="photo">Choose a Photo</label>
             <div id="file-info"></div>
+            <div id="preview"></div>
+            <div id="result"></div>
+    
             <button type="submit">Upload and Recognize</button>
+            
         </form>
-        <div id="result"></div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -45,11 +57,22 @@
                 contentType: false,
                 processData: false,
                 success: function(data) {
+                    $('#preview').hide();  // Hide the preview image
                     $('#result').html('<img src="' + data.photo_path + '" alt="Uploaded Photo"><p>Predicted Food Item: ' + data.food_item + '</p>');
                 }
             });
 
             return false;
+        }
+
+        // Preview the image when it's selected
+        function previewImage() {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#result').html('');  // Clear the result
+                $('#preview').html('<img src="' + e.target.result + '" alt="Uploaded Photo">').show();
+            }
+            reader.readAsDataURL(document.getElementById('photo').files[0]);
         }
     </script>
 
