@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %} FoodRecognition App {% endblock %}
+
+{% block body %}
+
+{% block stylesheets %}
+<!-- Additional stylesheets for the home page -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+{% endblock %}
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Choose the image to continue</h1>
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data"
+            onsubmit="return validateForm()">
+            <input type="file" name="photo" id="photo" accept="image/*">
+            <label for="photo">Choose a Photo</label>
+            <div id="file-info"></div>
+            <button type="submit">Upload and Recognize</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Client-side validation
+        function validateForm() {
+            const fileInput = document.getElementById('photo');
+
+            // Check if a file is selected
+            if (fileInput.files.length === 0) {
+                alert('Please choose an image before uploading.');
+                return false;
+            }
+
+            var formData = new FormData();
+            formData.append('photo', $('#photo')[0].files[0]);
+
+            $.ajax({
+                url: '/upload',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    $('#result').html('<img src="' + data.photo_path + '" alt="Uploaded Photo"><p>Predicted Food Item: ' + data.food_item + '</p>');
+                }
+            });
+
+            return false;
+        }
+    </script>
+
+</body>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %} Result {% endblock %}
+
+{% block body %}
+{% block stylesheets %}
+<!-- Additional stylesheets for the home page -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+
+{% endblock %}
+
+</body>
+    <div class="container">
+        <h2>Food Recognition Result</h2>
+        <img src="{{ photo_path }}" alt="Uploaded Photo">
+        <p>Predicted Food Item: {{ food_item }}</p>
+        <button onclick="searchAnother()">Search Another</button>
+    </div>
+
+    <script>
+        function searchAnother() {
+            // Redirect to the page where users can upload a new photo
+            window.location.href = "/"; // Change the URL to your upload page
+        }
+    </script>
+
+</body>
+{% endblock %}

@@ -1,0 +1,119 @@
+body {
+    margin: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar {
+    background-color: #333;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .brand {
+    color: white;
+    font-weight: 600;
+  }
+  
+  .brand-text {
+    font-size: 1.5rem;
+  }
+  
+  .navbar-links {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+  }
+  
+  .navbar-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+  }
+  
+  .navbar-links a:hover {
+    border-bottom: 2px solid white;
+  }
+  
+  .navbar-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .navbar {
+      flex-direction: row; /* Align items in a row */
+      justify-content: space-between; /* Space items evenly */
+      align-items: center; /* Center align items vertically */
+    }
+  
+    .brand {
+      order: 1; /* Place brand on the left */
+    }
+  
+    .navbar-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: 60px;
+      right: 0; /* Align navbar links to the right */
+      background-color: #333;
+    }
+  
+    .navbar-links.show {
+      display: flex;
+    }
+  
+    .navbar-toggle {
+      display: flex;
+      order: 2; /* Move toggle icon to the right */
+    }
+  }
+  
+  
+  
+  h1 {
+    margin: 15px 0;
+    text-align: left;
+  }
+  
+  
+  p {
+    text-align: center;
+    color: #666;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  /* Style for the body */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Example styles for a centered container */
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
